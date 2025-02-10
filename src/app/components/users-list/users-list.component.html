@@ -1,6 +1,9 @@
-<h2>Users List</h2>
-<ul>
-  <li *ngFor="let user of users">
-    {{user.id}} - {{user.name}} 
-  </li>
-</ul>
+<button mat-button (click)="openDialog()" >Добавить пользователя</button>
+<h2>Список пользователей</h2>
+<div  style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <div  *ngFor="let user of users$ | async"style="width: 200px; border: 1px solid saddlebrown; margin: 10px; padding: 5px ;">
+  <app-user-card [user]="user" (deleteUser)="deleteUser($event) "></app-user-card>
+  </div>
+</div>  
+
+

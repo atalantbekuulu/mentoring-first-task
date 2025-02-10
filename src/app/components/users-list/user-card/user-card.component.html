@@ -1,0 +1,7 @@
+    <h3>пользователь</h3>
+    <p>{{user?.id}} Имя: {{user?.name}}</p>
+    <p>адрес: {{user?.address?.street}}</p>   
+     <p>номер тел:{{ user?.phone }}</p>
+     <button mat-button (click)="openDialog()">редактировать пользователя</button>
+    <button mat-button (click)="clickDeleteUser()">Удалить</button>
+    
