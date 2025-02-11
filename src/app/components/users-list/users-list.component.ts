@@ -5,7 +5,8 @@ import { UsersService } from '../../services/users.service';
 import { UserCardComponent } from "./user-card/user-card.component";
 import {MatButtonModule} from "@angular/material/button"
 import {MatDialog} from '@angular/material/dialog';
-import { CreateEditUserComponent } from './create-edit-user/create-edit-user.component';
+import { User } from '../interfaces/users-model';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 
 @Component({
     selector: 'app-users-list',
@@ -32,14 +33,14 @@ export class UserListComponent implements OnInit {
     this.usersService.userDelete(id)
   }
   openDialog(): void {
-      const dialogRef = this.dialog.open(CreateEditUserComponent, {
-        data: {user:this.users$}, 
+      const dialogRef = this.dialog.open(EditUserDialogComponent, {
+        data: {user:this.users$},
       });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('закрытие модального окна')
+      this.usersService.userEdit(result)
     });
   }
-  onSubmit() :void{
-    console.log('сработала отправка')
+  outputEditData(emit:User) {
+    this.usersService.userEdit(emit)
   }
 }

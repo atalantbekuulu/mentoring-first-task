@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { inject, Injectable} from '@angular/core';
 import { UsersApiService } from './users-api.service';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../components/interfaces/users-model';
@@ -9,8 +9,8 @@ import { User } from '../components/interfaces/users-model';
 export class UsersService{
   private usersSubject$ = new BehaviorSubject<User[]>([])
   public readonly users$ = this.usersSubject$.asObservable()
-  constructor(private readonly UsersServiceApi: UsersApiService) { 
-   }
+  private readonly UsersServiceApi = inject(UsersApiService)
+  
   public loadUsers():void{
     this.UsersServiceApi.getUsers().subscribe((response:User[])=> {
     this.usersSubject$.next(response)
@@ -19,4 +19,14 @@ export class UsersService{
   public userDelete(id:number):void{
   this.usersSubject$.next(this.usersSubject$.value.filter((user:User)=> user.id !== id))
  }
+  public userEdit(editUser :User) :void {
+    if(editUser.id){
+      this.usersSubject$.next(this.usersSubject$.value.map((user)=>{
+       return user.id === editUser.id ? editUser : user;
+      }))
+    }else {
+      this.usersSubject$.next([...this.usersSubject$.value,{ ...editUser , id: Date.now()}])
+      console.log(this.usersSubject$.value)
+      }
+  }
 }

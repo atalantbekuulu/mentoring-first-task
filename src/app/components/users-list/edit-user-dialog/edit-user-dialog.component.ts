@@ -20,7 +20,14 @@ export class EditUserDialogComponent {
 
     public readonly myFormBuilder = this.fb.group({
         name:[this.data.user.name, [Validators.required,Validators.minLength(2)]],
-        address: [this.data.user.address?.street, [Validators.required, Validators.minLength(2)]],
+        address:  [this.data.user.address?.street, [Validators.required, Validators.minLength(2)]],
         phone: [this.data.user.phone, [Validators.required, Validators.minLength(7), Validators.maxLength(15)]],
     })
+    get userWithUpdateFields(){
+        return {
+            ...this.myFormBuilder.value,
+            address:{ street :this.myFormBuilder.value.address},
+            id: this.data.user.id
+        }
+    }
 }

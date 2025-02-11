@@ -16,6 +16,9 @@ export class UserCardComponent {
   user?: User
 
   @Output()
+  outputEditData = new EventEmitter()
+
+  @Output()
   deleteUser = new EventEmitter<number>()
   readonly dialog = inject(MatDialog)
  
@@ -26,9 +29,10 @@ export class UserCardComponent {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       data: {user:this.user}, 
     });
+
   dialogRef.afterClosed().subscribe(editResult => {
     if(!editResult) return
-    console.log('закрытие модального окна',editResult)
+    this.outputEditData.emit(editResult)
   });
 }
 }
