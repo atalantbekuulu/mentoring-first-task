@@ -14,9 +14,10 @@ import { User } from "../../interfaces/users-model";
 })
 
 export class EditUserDialogComponent {
-    readonly data = inject<{user:User}>(MAT_DIALOG_DATA)
+    public readonly data = inject<{user:User; isEdit:boolean}>(MAT_DIALOG_DATA)
     private readonly fb = inject(FormBuilder)
     readonly dialogRef = inject(MatDialogRef)
+    
 
     public readonly myFormBuilder = this.fb.group({
         name:[this.data.user.name, [Validators.required,Validators.minLength(2)]],

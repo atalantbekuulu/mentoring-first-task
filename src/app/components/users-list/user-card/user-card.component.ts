@@ -25,9 +25,9 @@ export class UserCardComponent {
   clickDeleteUser(){
     this.deleteUser.emit(this.user?.id)
   }
-  openDialog(): void {
+  openDialog(isEdit: boolean = true): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      data: {user:this.user}, 
+      data: {user:this.user, isEdit:isEdit}, 
     });
 
   dialogRef.afterClosed().subscribe(editResult => {

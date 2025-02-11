@@ -16,5 +16,5 @@
         <input matInput formControlName="phone">
         <mat-error *ngIf="myFormBuilder.controls['phone']?.invalid && myFormBuilder.controls['phone']?.touched">введите корректный номер</mat-error>
     </mat-form-field>
-        <button mat-button  [mat-dialog-close]="userWithUpdateFields">Сохранить</button>
+        <button mat-button  [mat-dialog-close]="userWithUpdateFields">{{data.isEdit?"Сохранить":"Создать"}}</button>
 </form>
