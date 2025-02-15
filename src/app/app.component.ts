@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import {  UserListComponent } from './components/users-list/users-list.component';
 import {MatButtonModule} from "@angular/material/button"
 
 @Component({
@@ -14,7 +13,6 @@ export class AppComponent {
   title = 'mentoring-first-project';
   constructor(private router: Router,)
   {}
-  sum: number = 100
   goToUserPage() {
     this.router.navigate(['/users'])
   }
