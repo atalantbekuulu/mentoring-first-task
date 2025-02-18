@@ -27,8 +27,7 @@ export class UserListComponent implements OnInit {
   private readonly localStorageService = inject(StorageService)
   public readonly users$ = this.usersService.users$
   readonly dialog = inject(MatDialog)
-    constructor() { 
-    }
+   
  ngOnInit(): void {
   const localStorageData = this.localStorageService.get<User>(StorageKeys.USERS)
   if( Array.isArray(localStorageData) && localStorageData.length > 0 ){
